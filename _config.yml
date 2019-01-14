@@ -16,7 +16,7 @@ safe: true
 title: Christian Lameiro
 author: Christian Lameiro
 description: Personal page and resume
-avatar: https://github.com/clameiro/lameiro.github.io/blob/master/static/img/CLameiro.jpg
+avatar: https://github.com/clameiro/lameiro.github.io/blob/master/static/img/CLameiro.jpg?raw=true
 email: christian.lameiro@gmail.com
 github: jekyller/sustain # username
 twitter: username
