@@ -10,7 +10,90 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/pcooksey/bibtex-js/ef59e62c/src/bibtex_js.js"></script>
-    <textarea id="bibtex_input" style="display:none;">
+        
+    <script>
+		$(function() {
+		  $("#Fontselector").on("change",function() {
+		    var font = $("#Fontselector option:selected").text();
+		    console.log(font);
+		
+		    $('.title.fonters').each(function() {
+		    	$(this).css("font-family",font);
+		    });
+		  }); 
+		});   
+		function reset() {
+			$("select").each(function () {
+			  localStorage.setItem($(this).attr("id"),"");
+			  $(this).val("");
+			}); 
+			$("#searchbar").val("");
+			$("#searchbar").trigger('change');
+		}
+    </script>
+    
+    <style>
+	    html,body,span,h1 {
+	    	font-family: "Times New Roman", Times, serif;
+	    	font-size: 17px;
+	    }
+	    bibtex { display: none; }
+	    .searchbar { margin-left:0px;}
+	    #bibtex_errors { margin-top:10px; color: red;}
+	    h1.header {margin-left:8px;}
+	    h1.YEAR { font-size: 17px; font-weight: bold; display: inline; margin-left:8px;}
+    </style>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+  </head>
+<body>
+	
+
+	
+<a name="top"></a>
+<h1 class="header">Your Publications</h1>
+<div class="container-fluid">
+	<div class="searchbar">
+		<div style="float:left;">
+			<button type="button" class="btn btn-default" onclick="reset()">Reset</button>
+		</div>
+		<div style="float:left;">
+			<select id="authorselectfirst" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" extra="first" search="author">
+			  <option value="">Search First Author</option>
+			</select>
+		</div>
+		<div style="float:left;">
+			<select id="authorselect" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" search="author">
+			  <option value="">Search Author</option>
+			</select>
+		</div>
+		<div style="float:left;">
+			<select id="topicselect" class="btn bibtex_search" style="border: 1px solid lightgrey;">
+			  <option value="">Search Topic</option>
+			  <!-- Add topic values here -->
+			  <option value="Example topic">Example Topic</option>
+			</select>
+		</div>
+		<div style="float:left;">
+			<input type="text" class="bibtex_search form-control" id="searchbar" placeholder="Search publications">
+			<span class="help-block">Example: journal 2015 (finds the intersection of the two terms)</span>
+		</div>
+	</div>
+</div>
+
+<div class="bibtex_structure">
+  <div class="group year" extra="ASC number">
+  	  <a href="#top" style="display: inline"><em>(Top of the page)</em></a>
+  	  <div style="padding-bottom:10px;"></div>
+  	  <div class="sort journal" extra="DESC string">
+      	<div class="templates"></div>
+      </div>
+  </div>
+</div>
+	
+	<textarea id="bibtex_input" style="display:none;">
 @article{Lameiro:2016ab,
 	Author = {Lameiro, Christian and Utschick, Wolfgang and Santamar{\'\i}a, Ignacio},
 	Date-Added = {2016-12-12 09:39:41 +0000},
@@ -509,85 +592,6 @@ the conventional MIMO schemes that operate at the baseband.},
 	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QD01vYmlsaWdodDExLnBkZtIXCxgZV05TLmRhdGFPEQGoAAAAAAGoAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADQSacPSCsAAAGqT5EPTW9iaWxpZ2h0MTEucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAapePdGUwLMAAAAAAAAAAAABAAIAAAkgAAAAAAAAAAAAAAAAAAAADk15UHVibGljYXRpb25zABAACAAA0EmK7wAAABEACAAA0ZSkkwAAAAEAEAGqT5EBqk6YAamdJAACZvMAAgBFTWFjaW50b3NoIEhEOlVzZXJzOgBMYW1laXJvOgBEcm9wYm94OgBNeVB1YmxpY2F0aW9uczoATW9iaWxpZ2h0MTEucGRmAAAOACAADwBNAG8AYgBpAGwAaQBnAGgAdAAxADEALgBwAGQAZgAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASADRVc2Vycy9MYW1laXJvL0Ryb3Bib3gvTXlQdWJsaWNhdGlvbnMvTW9iaWxpZ2h0MTEucGRmABMAAS8AABUAAgAO//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4AoAClAK0CWQJbAmACawJ0AoIChgKNApYCmwKoAqsCvQLAAsUAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACxw==}}
 
 </textarea>
-    
-    <script>
-		$(function() {
-		  $("#Fontselector").on("change",function() {
-		    var font = $("#Fontselector option:selected").text();
-		    console.log(font);
-		
-		    $('.title.fonters').each(function() {
-		    	$(this).css("font-family",font);
-		    });
-		  }); 
-		});   
-		function reset() {
-			$("select").each(function () {
-			  localStorage.setItem($(this).attr("id"),"");
-			  $(this).val("");
-			}); 
-			$("#searchbar").val("");
-			$("#searchbar").trigger('change');
-		}
-    </script>
-    
-    <style>
-	    html,body,span,h1 {
-	    	font-family: "Times New Roman", Times, serif;
-	    	font-size: 17px;
-	    }
-	    bibtex { display: none; }
-	    .searchbar { margin-left:0px;}
-	    #bibtex_errors { margin-top:10px; color: red;}
-	    h1.header {margin-left:8px;}
-	    h1.YEAR { font-size: 17px; font-weight: bold; display: inline; margin-left:8px;}
-    </style>
-    
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
-  </head>
-<body>
-<a name="top"></a>
-<h1 class="header">Your Publications</h1>
-<div class="container-fluid">
-	<div class="searchbar">
-		<div style="float:left;">
-			<button type="button" class="btn btn-default" onclick="reset()">Reset</button>
-		</div>
-		<div style="float:left;">
-			<select id="authorselectfirst" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" extra="first" search="author">
-			  <option value="">Search First Author</option>
-			</select>
-		</div>
-		<div style="float:left;">
-			<select id="authorselect" class="btn bibtex_search bibtex_author" style="border: 1px solid lightgrey;" search="author">
-			  <option value="">Search Author</option>
-			</select>
-		</div>
-		<div style="float:left;">
-			<select id="topicselect" class="btn bibtex_search" style="border: 1px solid lightgrey;">
-			  <option value="">Search Topic</option>
-			  <!-- Add topic values here -->
-			  <option value="Example topic">Example Topic</option>
-			</select>
-		</div>
-		<div style="float:left;">
-			<input type="text" class="bibtex_search form-control" id="searchbar" placeholder="Search publications">
-			<span class="help-block">Example: journal 2015 (finds the intersection of the two terms)</span>
-		</div>
-	</div>
-</div>
-
-<div class="bibtex_structure">
-  <div class="group year" extra="ASC number">
-  	  <a href="#top" style="display: inline"><em>(Top of the page)</em></a>
-  	  <div style="padding-bottom:10px;"></div>
-  	  <div class="sort journal" extra="DESC string">
-      	<div class="templates"></div>
-      </div>
-  </div>
-</div>
 
 <div id="bibtex_display">
   
